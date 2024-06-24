@@ -1,14 +1,10 @@
-class Database
-{
-    public void AddAsTag(string postmessage)
-    {
-        var currentDirectory = Environment.CurrentDirectory;
-        File.AppendAllText(currentDirectory + "/Tag.txt", postmessage);
-    }
+namespace Workshop.Day1;
 
-    public void Add(string postmessage)
+public class Database
+{
+    public async Task Add(Post post)
     {
         var currentDirectory = Environment.CurrentDirectory;
-        File.AppendAllText(currentDirectory + "/NoTag.txt", postmessage);
+        await File.AppendAllTextAsync(currentDirectory + $"/{post.Type}.txt", post.Message);
     }
 }

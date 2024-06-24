@@ -1,14 +1,21 @@
-public class Post
+namespace Workshop.Day1;
+
+public abstract class Post
 {
-    internal void CreatePost(Database db, string postmessage)
+    protected Post(string message, string type)
     {
-        if (postmessage.StartsWith("#"))
-        {
-            db.AddAsTag(postmessage);
-        }
-        else
-        {
-            db.Add(postmessage);
-        }
+        Message = message;
+        Type = type;
     }
+    public string Message { get; }
+    
+    public string Type { get; }
+
+    public static Post CreatePost(string message) =>
+        message switch
+        {
+            null => throw new ArgumentNullException(nameof(message)),
+            ['#', .. var s] => TaggedPost.Create(s),
+            _ => SimplePost.Create(message)
+        };
 }
