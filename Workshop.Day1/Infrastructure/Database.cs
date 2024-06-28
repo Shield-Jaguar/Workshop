@@ -1,6 +1,8 @@
-namespace Workshop.Day1;
+using Workshop.Day1.A;
 
-public class Database
+namespace Workshop.Day1.Infrastructure;
+
+public class Database : IDatabase
 {
     public async Task Add(Post post)
     {
